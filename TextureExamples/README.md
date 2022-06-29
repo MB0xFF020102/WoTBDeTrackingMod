@@ -1,0 +1,1 @@
+- DumpColorsArray.py -> Extract Colors Array -> Stored Into Application of Replacement
