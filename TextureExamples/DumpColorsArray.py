@@ -5,60 +5,60 @@ numberOfColorsNormal = len(normalFilenames)
 numberOfColorsPacked = len(packedFilenames)
 
 if (numberOfColorsNormal != numberOfColorsPacked):
-	print("Logger::Error: (numberOfColorsNormal != numberOfColorsPacked)")
-	exit()
+    print("Logger::Error: (numberOfColorsNormal != numberOfColorsPacked)")
+    exit()
 
 resultFileStream = open("dumpResult.txt", "w")
 
 def GetPathNameFromFilename( isNormal, fileName ):
 
-	filePathResult = ""
+    filePathResult = ""
 
-	if (isNormal == True):
-		filePathResult = "NORMAL/" + fileName
+    if (isNormal == True):
+        filePathResult = "NORMAL/" + fileName
 
-	elif (isNormal == False):
-		filePathResult = "DVPL/" + fileName
+    elif (isNormal == False):
+        filePathResult = "DVPL/" + fileName
 
-	return filePathResult
+    return filePathResult
 
 def ReceiveDataFromFilePath( filePath ):
 
-	file = open(filePath, "rb+")
-	fileData = file.read()
-	file.close()
+    file = open(filePath, "rb+")
+    fileData = file.read()
+    file.close()
 
-	return fileData
+    return fileData
 
 def WriteDumpLineFromFileData( fileData ):
 
-	bufferExtracted = list(fileData)
-	bufferExtractedAsString = str(bufferExtracted)
+    bufferExtracted = list(fileData)
+    bufferExtractedAsString = str(bufferExtracted)
 
-	resultFileStream.writelines(bufferExtractedAsString + "\n")
+    resultFileStream.writelines(bufferExtractedAsString + "\n")
 
 def CreateDumpLines():
 
-	resultFileStream.writelines("NORMAL IN ORDER:" + "\n")
+    resultFileStream.writelines("NORMAL IN ORDER:" + "\n")
 
-	for fileNum in range (0, numberOfColorsNormal):
+    for fileNum in range (0, numberOfColorsNormal):
 
-		fileName = normalFilenames[fileNum]
-		filePath = GetPathNameFromFilename(True, fileName)
-		fileData = ReceiveDataFromFilePath(filePath)
+        fileName = normalFilenames[fileNum]
+        filePath = GetPathNameFromFilename(True, fileName)
+        fileData = ReceiveDataFromFilePath(filePath)
 
-		WriteDumpLineFromFileData(fileData)
+        WriteDumpLineFromFileData(fileData)
 
-	resultFileStream.writelines("PACKED IN ORDER:" + "\n")
+    resultFileStream.writelines("PACKED IN ORDER:" + "\n")
 
-	for fileNum in range (0, numberOfColorsPacked):
+    for fileNum in range (0, numberOfColorsPacked):
 
-		fileName = packedFilenames[fileNum]
-		filePath = GetPathNameFromFilename(False, fileName)
-		fileData = ReceiveDataFromFilePath(filePath)
+        fileName = packedFilenames[fileNum]
+        filePath = GetPathNameFromFilename(False, fileName)
+        fileData = ReceiveDataFromFilePath(filePath)
 
-		WriteDumpLineFromFileData(fileData)
+        WriteDumpLineFromFileData(fileData)
 
-	resultFileStream.close()
+    resultFileStream.close()
 
 CreateDumpLines()
