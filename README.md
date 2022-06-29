@@ -7,3 +7,4 @@
 	- Python : Automatically Find and Replace tracks files to filled Colors
 	
 - Author : Melvil*
+- Python : "3.9"

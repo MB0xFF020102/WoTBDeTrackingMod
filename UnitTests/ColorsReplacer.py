@@ -44,7 +44,7 @@ def ColorsReplacerSwitcher( filePath, colorEnabled ):
             colorBuffer = ColorsConst.PACKED_RED
 
     elif colorEnabled == "YELLOW":
-        colorBuffer = ColorsConst.NORMAL_CYAN
+        colorBuffer = ColorsConst.NORMAL_YELLOW
         if isDVPL == True:
             colorBuffer = ColorsConst.PACKED_YELLOW
 
