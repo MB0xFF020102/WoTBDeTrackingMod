@@ -3,6 +3,12 @@ import ColorsConst
 
 packsPath = os.path.dirname(os.path.realpath(__file__))
 
+def WriteBufferToFilePath( filePath, buffer ):
+
+    streamWriter = open(filePath, "wb")
+    streamWriter.write(buffer)
+    streamWriter.close()
+
 def CollectFilePathList():
 
     filePathList = []
@@ -15,7 +21,10 @@ def CollectFilePathList():
 
 def ColorsReplacerSwitcher( filePath, colorEnabled ):
 
-    print("Track FilePath Found:", filePath)
+    if ".pvr" in filePath:
+        filePathConv = filePath.replace(".pvr", ".dds")
+        filePath = filePathConv
+        print("PVR Converted to DDS:", filePath)
 
     isDVPL = False
     if ".dvpl" in filePath:
@@ -48,15 +57,11 @@ def ColorsReplacerSwitcher( filePath, colorEnabled ):
         if isDVPL == True:
             colorBuffer = ColorsConst.PACKED_YELLOW
 
-    print("Overwriting To Filled Color:", filePath)
-
-    colorReplacer = open(filePath, "wb")
-    colorReplacer.write(colorBuffer)
-    colorReplacer.close()
+    WriteBufferToFilePath(filePath, colorBuffer)
 
 def ColorsReplacer( colorEnabled ):
 
-    print("Replacing Color is:", colorEnabled)
+    print("Tracks Color Activated:", colorEnabled)
 
     filePathList = CollectFilePathList()
 
