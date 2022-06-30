@@ -3,12 +3,59 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel
 from PyQt5.QtGui import QIcon, QPixmap
 
+import tempfile, os
+import AppConst
+
+tempDirectory = tempfile.gettempdir()
+tempStoragePath = tempDirectory + "\\WoTBDeTrackingMod"
+
+if os.path.exists(tempStoragePath) != True:
+    os.mkdir(tempStoragePath)
+
+    # Way to Store App Images
+    streamImages = open(tempStoragePath+"\\ColorCyan.png", "wb")
+    streamImages.write(AppConst.ColorCyanPng)
+    streamImages = open(tempStoragePath+"\\ColorGreen.png", "wb")
+    streamImages.write(AppConst.ColorGreenPng)
+    streamImages = open(tempStoragePath+"\\ColorPink.png", "wb")
+    streamImages.write(AppConst.ColorPinkPng)
+    streamImages = open(tempStoragePath+"\\ColorRed.png", "wb")
+    streamImages.write(AppConst.ColorRedPng)
+    streamImages = open(tempStoragePath+"\\ColorYellow.png", "wb")
+    streamImages.write(AppConst.ColorYellowPng)
+    streamImages = open(tempStoragePath+"\\Demonstration.png", "wb")
+    streamImages.write(AppConst.DemonstrationPng)
+    streamImages = open(tempStoragePath+"\\SaveDataPath.png", "wb")
+    streamImages.write(AppConst.SaveDataPathPng)
+    streamImages.close()
+    
+
 class Ui_WoTBDeTrackingMod(object):
     def setupUi(self, WoTBDeTrackingMod):
         WoTBDeTrackingMod.setObjectName("WoTBDeTrackingMod")
         WoTBDeTrackingMod.resize(495, 184)
         WoTBDeTrackingMod.setMinimumSize(QtCore.QSize(495, 184))
         WoTBDeTrackingMod.setMaximumSize(QtCore.QSize(495, 184))
+        palette = QtGui.QPalette()
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Base, brush)
+        brush = QtGui.QBrush(QtGui.QColor(62, 62, 62))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Window, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Base, brush)
+        brush = QtGui.QBrush(QtGui.QColor(62, 62, 62))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Window, brush)
+        brush = QtGui.QBrush(QtGui.QColor(62, 62, 62))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Base, brush)
+        brush = QtGui.QBrush(QtGui.QColor(62, 62, 62))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Window, brush)
+        WoTBDeTrackingMod.setPalette(palette)
         self.centralwidget = QtWidgets.QWidget(WoTBDeTrackingMod)
         self.centralwidget.setObjectName("centralwidget")
         self.Demonstration = QtWidgets.QLabel(self.centralwidget)
@@ -43,17 +90,17 @@ class Ui_WoTBDeTrackingMod(object):
         self.ColorCyan.setText("")
         self.ColorCyan.setObjectName("ColorCyan")
 
-        demonstrationPixmap = QPixmap("images/Demonstration.png")
+        demonstrationPixmap = QPixmap(tempStoragePath+"\\Demonstration.png")
         self.Demonstration.setPixmap(demonstrationPixmap)
 
-        saveDataPathPixmap = QPixmap("images/SaveDataPath.png")
+        saveDataPathPixmap = QPixmap(tempStoragePath+"\\SaveDataPath.png")
         self.SaveDataPath.setPixmap(saveDataPathPixmap)
 
-        colorCyanPixmap = QPixmap("images/ColorCyan.png")
-        colorGreenPixmap = QPixmap("images/ColorGreen.png")
-        colorPinkPixmap = QPixmap("images/ColorPink.png")
-        colorYellowPixmap = QPixmap("images/ColorYellow.png")
-        colorRedPixmap = QPixmap("images/ColorRed.png")
+        colorCyanPixmap = QPixmap(tempStoragePath+"\\ColorCyan.png")
+        colorGreenPixmap = QPixmap(tempStoragePath+"\\ColorGreen.png")
+        colorPinkPixmap = QPixmap(tempStoragePath+"\\ColorPink.png")
+        colorYellowPixmap = QPixmap(tempStoragePath+"\\ColorYellow.png")
+        colorRedPixmap = QPixmap(tempStoragePath+"\\ColorRed.png")
 
         self.ColorCyan.setPixmap(colorCyanPixmap)
         self.ColorGreen.setPixmap(colorGreenPixmap)
