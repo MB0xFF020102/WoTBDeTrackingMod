@@ -8,7 +8,23 @@ import ColorsReplacer
 import AppConst
 
 tempDirectory = tempfile.gettempdir()
-tempStoragePath = tempDirectory + "\\WoTBDeTrackingMod"    
+tempStoragePath = tempDirectory + "\\WoTBDeTrackingMod"
+
+dataDirectory = ""
+
+def ReadSaveDataPath():
+    global dataDirectory
+    if os.path.exists("savedDataPath.txt") == True:
+        streamReader = open("savedDataPath.txt", "r")
+        dataDirectory = streamReader.read()
+        streamReader.close()
+    else:
+        dataDirectory = "Enter here your WoTB/Data/3d directory"
+
+def WriteSaveDataPath( dirToSave ):
+    streamWriter = open("savedDataPath.txt", "w")
+    streamWriter.write(dirToSave)
+    streamWriter.close()
 
 class Ui_WoTBDeTrackingMod(object):
     def setupUi(self, WoTBDeTrackingMod):
@@ -71,6 +87,9 @@ class Ui_WoTBDeTrackingMod(object):
         self.SaveDataPath.setObjectName("SaveDataPath")
         WoTBDeTrackingMod.setCentralWidget(self.centralwidget)
 
+        ReadSaveDataPath()
+        self.SaveDataPathLine.setText(dataDirectory)
+
         # Design
         demonstrationPixmap = QPixmap(tempStoragePath+"\\Demonstration.png")
         self.Demonstration.setPixmap(demonstrationPixmap)
@@ -95,25 +114,35 @@ class Ui_WoTBDeTrackingMod(object):
 
         # Buttons Actions
         def ChangeTracksToCyan():
-            ColorsReplacer.ColorsReplacer("CYAN")
+            dataDirectory = self.SaveDataPathLine.text()
+            ColorsReplacer.ColorsReplacer("CYAN", dataDirectory)
 
         def ChangeTracksToGreen():
-            ColorsReplacer.ColorsReplacer("GREEN")
+            dataDirectory = self.SaveDataPathLine.text()
+            ColorsReplacer.ColorsReplacer("GREEN", dataDirectory)
 
         def ChangeTracksToPink():
-            ColorsReplacer.ColorsReplacer("PINK")
+            dataDirectory = self.SaveDataPathLine.text()
+            ColorsReplacer.ColorsReplacer("PINK", dataDirectory)
 
         def ChangeTracksToYellow():
-            ColorsReplacer.ColorsReplacer("YELLOW")
+            dataDirectory = self.SaveDataPathLine.text()
+            ColorsReplacer.ColorsReplacer("YELLOW", dataDirectory)
 
         def ChangeTracksToRed():
-            ColorsReplacer.ColorsReplacer("RED")
+            dataDirectory = self.SaveDataPathLine.text()
+            ColorsReplacer.ColorsReplacer("RED", dataDirectory)
         
         self.ColorCyan.clicked.connect(ChangeTracksToCyan)
         self.ColorGreen.clicked.connect(ChangeTracksToGreen)
         self.ColorPink.clicked.connect(ChangeTracksToPink)
         self.ColorYellow.clicked.connect(ChangeTracksToYellow)
         self.ColorRed.clicked.connect(ChangeTracksToRed)
+
+        def SaveDataPathAction():
+            WriteSaveDataPath(self.SaveDataPathLine.text())
+
+        self.SaveDataPath.clicked.connect(SaveDataPathAction)
 
         self.retranslateUi(WoTBDeTrackingMod)
         QtCore.QMetaObject.connectSlotsByName(WoTBDeTrackingMod)

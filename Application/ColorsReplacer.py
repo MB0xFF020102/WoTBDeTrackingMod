@@ -1,19 +1,17 @@
 import os
 import ColorsConst
 
-packsPath = os.path.dirname(os.path.realpath(__file__))
-
 def WriteBufferToFilePath( filePath, buffer ):
 
     streamWriter = open(filePath, "wb")
     streamWriter.write(buffer)
     streamWriter.close()
 
-def CollectFilePathList():
+def CollectFilePathList( dataDirectory ):
 
     filePathList = []
 
-    for root, dirs, files in os.walk(packsPath):
+    for root, dirs, files in os.walk(dataDirectory):
         for file in files:
             filePathList.append(os.path.join(root,file))
 
@@ -59,11 +57,11 @@ def ColorsReplacerSwitcher( filePath, colorEnabled ):
 
     WriteBufferToFilePath(filePath, colorBuffer)
 
-def ColorsReplacer( colorEnabled ):
+def ColorsReplacer( colorEnabled, dataDirectory ):
 
     print("Tracks Color Activated:", colorEnabled)
 
-    filePathList = CollectFilePathList()
+    filePathList = CollectFilePathList(dataDirectory)
 
     for filePath in filePathList:
         if "track.dx11" in filePath:
