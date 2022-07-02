@@ -7,28 +7,7 @@ import tempfile, os
 import AppConst
 
 tempDirectory = tempfile.gettempdir()
-tempStoragePath = tempDirectory + "\\WoTBDeTrackingMod"
-
-if os.path.exists(tempStoragePath) != True:
-    os.mkdir(tempStoragePath)
-
-    # Way to Store App Images
-    streamImages = open(tempStoragePath+"\\ColorCyan.png", "wb")
-    streamImages.write(AppConst.ColorCyanPng)
-    streamImages = open(tempStoragePath+"\\ColorGreen.png", "wb")
-    streamImages.write(AppConst.ColorGreenPng)
-    streamImages = open(tempStoragePath+"\\ColorPink.png", "wb")
-    streamImages.write(AppConst.ColorPinkPng)
-    streamImages = open(tempStoragePath+"\\ColorRed.png", "wb")
-    streamImages.write(AppConst.ColorRedPng)
-    streamImages = open(tempStoragePath+"\\ColorYellow.png", "wb")
-    streamImages.write(AppConst.ColorYellowPng)
-    streamImages = open(tempStoragePath+"\\Demonstration.png", "wb")
-    streamImages.write(AppConst.DemonstrationPng)
-    streamImages = open(tempStoragePath+"\\SaveDataPath.png", "wb")
-    streamImages.write(AppConst.SaveDataPathPng)
-    streamImages.close()
-    
+tempStoragePath = tempDirectory + "\\WoTBDeTrackingMod"    
 
 class Ui_WoTBDeTrackingMod(object):
     def setupUi(self, WoTBDeTrackingMod):
